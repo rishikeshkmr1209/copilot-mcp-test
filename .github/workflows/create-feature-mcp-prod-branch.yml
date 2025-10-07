@@ -2,6 +2,9 @@ name: Create feature-mcp-prod Branch
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   create-branch:
