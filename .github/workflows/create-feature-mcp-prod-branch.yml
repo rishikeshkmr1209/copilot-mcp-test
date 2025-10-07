@@ -11,26 +11,27 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: main
-      
+
       - name: Create and push feature-mcp-prod branch
         run: |
           # Configure git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # Check if branch already exists on remote
-          if git ls-remote --heads origin feature-mcp-prod | grep -q feature-mcp-prod; then
-            echo "✓ Branch feature-mcp-prod already exists on remote"
+          if git ls-remote --heads origin feature-mcp-prod | \
+             grep -q feature-mcp-prod; then
+            echo "✓ Branch feature-mcp-prod already exists"
             exit 0
           fi
-          
+
           # Create and push the new branch from current main
           git checkout -b feature-mcp-prod
           git push origin feature-mcp-prod
-          echo "✓ Branch feature-mcp-prod created and pushed successfully"
+          echo "✓ Branch feature-mcp-prod created successfully"
