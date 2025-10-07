@@ -1,6 +1,7 @@
 package com.example.tasktracker;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -21,9 +22,13 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public Task updateTask(@PathVariable String id, @RequestBody Task task) {
-        task.setId(id);
-        return taskRepository.save(task);
+    public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task task) {
+        return taskRepository.findById(id)
+            .map(existingTask -> {
+                task.setId(id);
+                return ResponseEntity.ok(taskRepository.save(task));
+            })
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
