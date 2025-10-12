@@ -1,1 +1,2 @@
-# copilot-mcp-test
+# copilot-mcp-workshop
+copilot-mcp-workshop desc

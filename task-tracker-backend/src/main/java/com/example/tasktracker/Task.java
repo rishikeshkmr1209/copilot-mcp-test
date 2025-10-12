@@ -1,7 +1,11 @@
 package com.example.tasktracker;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document(collection = "tasks")
 public class Task {
@@ -9,6 +13,7 @@ public class Task {
     private String id;
     private String title;
     private String description;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     private Date dueDate;
     private String status;
 
